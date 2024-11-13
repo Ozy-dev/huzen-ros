@@ -1,15 +1,15 @@
 #!/usr/bin/env python
 
-from _future_ import print_function
+from _future_ import print_function  # Corrected import
 import sys
 import rospy
-from beginner_tutorials.srv import AddTwoInts
+from beginner_tutorials.srv import pythagorasints
 
 # Fungsi untuk memanggil service yang menghitung jarak antara dua titik
 def calculate_distance_client(x1, y1, x2, y2):
     rospy.wait_for_service('calculate_distance')
     try:
-        calculate_distance = rospy.ServiceProxy('calculate_distance', AddTwoInts)
+        calculate_distance = rospy.ServiceProxy('calculate_distance', pythagorasints)
         response = calculate_distance(x1, y1, x2, y2)
         return response.sum
     except rospy.ServiceException as e:
@@ -19,7 +19,7 @@ def calculate_distance_client(x1, y1, x2, y2):
 def usage():
     return "%s [x1 y1 x2 y2]" % sys.argv[0]
 
-if _name_ == "_main_":
+if _name_ == "_main_":  # Corrected condition
     if len(sys.argv) == 5:
         x1 = int(sys.argv[1])
         y1 = int(sys.argv[2])
